@@ -1,5 +1,11 @@
 package com.apipothi.amazon;
-
+/*
+ * Author    : API POTHI
+ * YouTube   : https://www.youtube.com/apipothi
+ * Web Site  : http://apipothi.com/
+ * Play List : MICROSERVICE-SPRINGBOOT
+ * JAVA      : 1.8
+*/
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

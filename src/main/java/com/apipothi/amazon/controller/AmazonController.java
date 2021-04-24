@@ -1,5 +1,11 @@
 package com.apipothi.amazon.controller;
-
+/*
+ * Author    : API POTHI
+ * YouTube   : https://www.youtube.com/apipothi
+ * Web Site  : http://apipothi.com/
+ * Play List : MICROSERVICE-SPRINGBOOT
+ * JAVA      : 1.8
+*/
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -36,6 +42,9 @@ public class AmazonController {
 	@Autowired
 	AmazonService service;
 
+	/*
+	 * Take All the product from PRODUCT MANUFACTURER and save it in to AMAZON DB
+	 */
 	@GetMapping("/addAllProductFromManufacturer")
 	public AmazonResponse addAllProductFromManufacturer() {
 		String statusMsg = "";
@@ -62,32 +71,9 @@ public class AmazonController {
 		return myresponse;
 	}
 
-	@GetMapping("/getProductByProductID/{id}")
-	public AmazonResponse getProductByProductID(@PathVariable String id) {
-		logger.info("***START---getProductByIDInAmazon :: id{}" + id);
-		AmazonResponse myresponse = new AmazonResponse();
-		String statusMsg = "";
-		try {
-			List<AmazonTO> amazonProductList = service.getProductByProductID(id);
-
-			myresponse.setProductDetails(amazonProductList);
-			myresponse.setMessage("SUCCESS");
-			myresponse.setPort(port);
-			myresponse.setAppname(appname);
-			myresponse.setStatuscode(200);
-
-		} catch (Exception e) {
-			statusMsg = "Exception Occured during data insertion" + e;
-			myresponse.setMessage(statusMsg);
-			myresponse.setPort(port);
-			myresponse.setAppname(appname);
-			myresponse.setStatuscode(400);
-			logger.error("-Exception{}", e);
-		}
-		logger.info("****END-Response getProductByIDInAmazon{}", myresponse);
-		return myresponse;
-	}
-	
+	/*
+	 * Get product details by ID from AMAZON DB
+	 */
 	@GetMapping("/getProductByIDInAmazon/{id}")
 	public AmazonResponse getProductByIDInAmazon(@PathVariable int id) {
 		logger.info("***START---getProductByIDInAmazon :: id{}" + id);
@@ -103,7 +89,7 @@ public class AmazonController {
 			myresponse.setStatuscode(200);
 
 		} catch (Exception e) {
-			statusMsg = "Exception Occured during data insertion" + e;
+			statusMsg = "Exception Occured while getting the Amazon data" + e;
 			myresponse.setMessage(statusMsg);
 			myresponse.setPort(port);
 			myresponse.setAppname(appname);
@@ -114,9 +100,11 @@ public class AmazonController {
 		return myresponse;
 	}
 
+	/*
+	 * Get All the product details from AMAZON DB
+	 */
 	@GetMapping("/getAmazonProduct")
 	public AmazonResponse getAmazonProduct() {
-		// Get all the data from Amazon DB
 		logger.info("***START---getAmazonProduct()");
 		AmazonResponse myresponse = new AmazonResponse();
 		try {
@@ -138,9 +126,11 @@ public class AmazonController {
 		return myresponse;
 	}
 
+	/*
+	 * Add All the product details in to AMAZON DB
+	 */
 	@PostMapping("/addProductInAmazon")
 	public AmazonResponse addProductInAmazon(@RequestBody List<AmazonRequest> request) {
-		// Add the data in Amazon DB
 		logger.info("***START---addProductInAmazon()" + request);
 		String statusMsg = "";
 		AmazonResponse myresponse = new AmazonResponse();
@@ -153,7 +143,7 @@ public class AmazonController {
 
 		} catch (Exception e) {
 			myresponse.setProductDetails(null);
-			myresponse.setMessage("Exception Occured During ading the data to Amazon");
+			myresponse.setMessage("Exception Occured During adding the data to Amazon");
 			myresponse.setPort(port);
 			myresponse.setAppname(appname);
 			myresponse.setStatuscode(400);
@@ -162,6 +152,9 @@ public class AmazonController {
 		return myresponse;
 	}
 
+	/*
+	 * Update the product details by ID in to AMAZON DB
+	 */
 	@PutMapping("/updateProductInAmazon/{id}")
 	public AmazonResponse updateProductInAmazon(@PathVariable int id, AmazonRequest request) {
 		logger.info("***START---updateProductInAmazon(){} id{} request{}", id, request);
@@ -185,6 +178,9 @@ public class AmazonController {
 		return myresponse;
 	}
 
+	/*
+	 * Delete the product details by ID in to AMAZON DB
+	 */
 	@DeleteMapping("/deleteProductInAmazon/{id}")
 	public AmazonResponse deleteProductInAmazon(@PathVariable int id) {
 		// Delete the data in Amazon DB

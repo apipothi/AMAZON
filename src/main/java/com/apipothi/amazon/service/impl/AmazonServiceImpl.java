@@ -1,5 +1,11 @@
 package com.apipothi.amazon.service.impl;
-
+/*
+ * Author    : API POTHI
+ * YouTube   : https://www.youtube.com/apipothi
+ * Web Site  : http://apipothi.com/
+ * Play List : MICROSERVICE-SPRINGBOOT
+ * JAVA      : 1.8
+*/
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -146,28 +152,6 @@ public class AmazonServiceImpl implements AmazonService {
 		success = true;
 		logger.info("***END--deleteProductInAmazon()--");
 		return success;
-	}
-
-	@Override
-	public List<AmazonTO> getProductByProductID(String id) {
-		logger.info("START- getProductByProductID{} :: id{}" + id);
-		AmazonTO to = new AmazonTO();
-		List<AmazonTO> amazonProductList = new ArrayList<AmazonTO>();
-		String statusmsg = "";
-		try {
-			Optional<AmazonProduct> amazonProduct = dao.findById(Integer.parseInt(id));
-			logger.info("***getProductByProductID ***" + amazonProduct);
-			to.setId(amazonProduct.get().getId());
-			to.setWproductid(amazonProduct.get().getProductid());
-			to.setWproductname(amazonProduct.get().getProductname());
-			to.setWproductprice(amazonProduct.get().getProductprice());
-			amazonProductList.add(to);
-		} catch (Exception e) {
-			statusmsg = "Exception occured while fetching the data by Product ID";
-			logger.error("-Exception{}", statusmsg);
-		}
-		logger.info("***END--getProductByProductID()--RESPONSE{} " + amazonProductList);
-		return amazonProductList;
 	}
 
 	private long amazonSellingPrice(long costPrice) {
